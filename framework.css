@@ -75,7 +75,8 @@ body {
 }
 
 .widget--navbar .top-bar-section li.navigation-item > a {
-    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-family: "Untitled Serif", Georgia, 'Times New Roman', Times, serif;
+    font-weight: 700;
 }
 
 @media only screen and (min-width: 64.063em) {
