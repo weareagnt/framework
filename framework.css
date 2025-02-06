@@ -1,0 +1,90 @@
+/* TEMP FILE FOR QUICK ITERATIONS ON FRAMEWORK HOMEOWNERSHIP SITE */
+
+@font-face {
+    font-family: 'Untitled Serif';
+    src: url('untitledserif-bold-webfont.woff2') format('woff2'),
+         url('untitledserif-bold-webfont.woff') format('woff');
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Untitled Serif';
+    src: url('untitledserif-medium-webfont.woff2') format('woff2'),
+         url('untitledserif-medium-webfont.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Untitled Serif';
+    src: url('untitledserif-regular-webfont.woff2') format('woff2'),
+         url('untitledserif-regular-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Untitled Sans';
+    src: url('untitledsans-bold-webfont.woff2') format('woff2'),
+         url('untitledsans-bold-webfont.woff') format('woff');
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Untitled Sans';
+    src: url('untitledsans-medium-webfont.woff2') format('woff2'),
+         url('untitledsans-medium-webfont.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Untitled Sans';
+    src: url('untitledsans-regular-webfont.woff2') format('woff2'),
+         url('untitledsans-regular-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    background: #999;
+}
+
+.container {
+    box-shadow: none;
+}
+
+.global-nav__container {
+    background-color: #008099;
+    color: #ffffff;
+    text-align: right;
+}
+
+.global-nav__container .nav--global-links {
+    background: none;
+    padding: 5px 1.5rem;
+}
+
+.global-nav__container .nav--global-links > a {
+    color: #ffffff;
+    font-family: "Times New Roman", serif;
+    font-size: 1rem;
+    text-transform: uppercase;
+}
+
+.widget--navbar .top-bar-section li.navigation-item > a {
+    color: red;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.widget--navbar .top-bar-section ul li>a {
+    color: blue;
+}
+
+@media only screen and (min-width: 64.063em) {
+    .global-nav__container {
+        max-width: 100%;
+    }
+}
