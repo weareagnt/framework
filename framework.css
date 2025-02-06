@@ -2,48 +2,48 @@
 
 @font-face {
     font-family: 'Untitled Serif';
-    src: url('untitledserif-bold-webfont.woff2') format('woff2'),
-         url('untitledserif-bold-webfont.woff') format('woff');
+    src: url('https://weareagnt.github.io/framework/untitledserif-bold-webfont.woff2') format('woff2'),
+         url('https://weareagnt.github.io/framework/untitledserif-bold-webfont.woff') format('woff');
     font-weight: 700;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'Untitled Serif';
-    src: url('untitledserif-medium-webfont.woff2') format('woff2'),
-         url('untitledserif-medium-webfont.woff') format('woff');
+    src: url('https://weareagnt.github.io/framework/untitledserif-medium-webfont.woff2') format('woff2'),
+         url('https://weareagnt.github.io/framework/untitledserif-medium-webfont.woff') format('woff');
     font-weight: 500;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'Untitled Serif';
-    src: url('untitledserif-regular-webfont.woff2') format('woff2'),
-         url('untitledserif-regular-webfont.woff') format('woff');
+    src: url('https://weareagnt.github.io/framework/untitledserif-regular-webfont.woff2') format('woff2'),
+         url('https://weareagnt.github.io/framework/untitledserif-regular-webfont.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'Untitled Sans';
-    src: url('untitledsans-bold-webfont.woff2') format('woff2'),
-         url('untitledsans-bold-webfont.woff') format('woff');
+    src: url('https://weareagnt.github.io/framework/untitledsans-bold-webfont.woff2') format('woff2'),
+         url('https://weareagnt.github.io/framework/untitledsans-bold-webfont.woff') format('woff');
     font-weight: 700;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'Untitled Sans';
-    src: url('untitledsans-medium-webfont.woff2') format('woff2'),
-         url('untitledsans-medium-webfont.woff') format('woff');
+    src: url('https://weareagnt.github.io/framework/untitledsans-medium-webfont.woff2') format('woff2'),
+         url('https://weareagnt.github.io/framework/untitledsans-medium-webfont.woff') format('woff');
     font-weight: 500;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'Untitled Sans';
-    src: url('untitledsans-regular-webfont.woff2') format('woff2'),
-         url('untitledsans-regular-webfont.woff') format('woff');
+    src: url('https://weareagnt.github.io/framework/untitledsans-regular-webfont.woff2') format('woff2'),
+         url('https://weareagnt.github.io/framework/untitledsans-regular-webfont.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 }
