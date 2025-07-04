@@ -1,0 +1,479 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js"></script>
+<script type="text/javascript">
+const elements = document.getElementsByTagName('body');
+elements[0].setAttribute('tx-content', 'translate_urls');
+</script>
+<script type="text/javascript">window.liveSettings={api_key:"a10d5000ec9b4d65837f5773af567ff5", manual_init: true, translate_urls: true};</script>
+<script type="text/javascript" src="//cdn.transifex.com/live.js"></script>
+<script type="text/javascript">Transifex.live.init()</script>
+
+<script>
+setTimeout(function() {
+ $(document).ready(function() {
+  if($('.application__content--survey #i18n-5').text().length){
+    var content = $('.application__content--survey #i18n-5').text().split('.');
+    var str="<h1>"+content[0]+"</h1><br>"; content.splice(0,1); str += content.join('.');
+    $('.application__content--survey #i18n-5').html(str);
+    }
+}, 4000);
+});
+</script>
+
+<script>
+    // Function to check and hide elements with class .ag-info
+    function checkAndHide() {
+        // Check if any element with class .ag-info exists
+                   var existCondition = setInterval(function() {
+                var url = new URL(window.location.href);
+                var segment = url.searchParams.get("client");
+                if(segment==null){
+                    var segment_position=1;
+                    var url= window.location.href;
+                    url=url.substring(0, url.indexOf('?'));
+                    url=url.replace('https://','');
+                    url=url.replace('http://','');
+                    url=url.split('/');
+                    url=url.filter(Boolean);
+                    //console.log(url);
+			  if(url.length==0){
+		//		clearInterval(existCondition);
+			  }
+                    var segment = url[segment_position];
+                }
+                if($('.'+segment+'.ag-info').length>0){
+					if ($('.ag-info').length > 0) {
+						$('.ag-info').hide();
+
+					}
+                    $('.'+segment).show();
+                    clearInterval(existCondition);
+                }else{
+					if ($('.ag-info').length > 0) {
+						$('.ag-info').hide();
+					}
+					$('.null.ag-info').show();
+				}
+        },100);
+            // Clear the interval after hiding the element
+            clearInterval(intervalId);
+
+    }
+
+var checkJQs = setInterval(function(){
+	if (typeof $ !== 'undefined') {
+	// $ is defined, you can use it here
+
+	intervalId = setInterval(checkAndHide, 3000);
+	clearInterval(checkJQs);
+	}
+},100);
+</script>
+
+<script>
+	$(document).on('click', '#button1', function() {
+		var amount=$('#amount_1').val();
+		var calc = amount*0.3;
+		$('#monthly_piti_1').html(calc.toFixed(2));
+		$('#p1').show();
+	});
+</script>
+
+<script>
+	$(document).on('click', '#button2', function() {
+		var amount=$('#amount_2').val();
+		var apmi = amount*0.01;
+		var empi = apmi/12
+		$('#monthly_pmi_1').html(apmi.toFixed(2));
+		$('#monthly_pmi_2').html(empi.toFixed(2));
+		$('#pm1').show();
+		$('#pm2').show();
+	});
+</script>
+
+<!--Firebase integration-->
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+<script>
+    var firebaseinteg=setInterval(function(){
+        if(document.getElementById('amount_1') && $('#amount_1').parents('table').length>0){
+    const firebaseConfig={
+        apiKey: "AIzaSyCOtGwx3MbJjGDc3YXevprxiZMY5ip2dHw",
+        authDomain: "ti-test-290b2.firebaseapp.com",
+        databaseURL: "https://ti-test-290b2-default-rtdb.firebaseio.com",
+        projectId: "ti-test-290b2",
+        storageBucket: "ti-test-290b2.appspot.com",
+        messagingSenderId: "190668253027",
+        appId: "1:190668253027:web:bf9317b618729a622c9556",
+        measurementId: "G-V23WFMQ93C"
+    }
+
+    firebase.initializeApp(firebaseConfig);
+    const database = firebase.database();
+    function fetchDataFromDatabase() {
+        const databaseRef = database.ref('/');
+        databaseRef.orderByChild("user").equalTo(window.CONF.preload.currentUser.currentUser.email).once('value').then((snapshot) => {
+            const data = snapshot.val();
+            displayDataOnWebsite(data);
+        });
+    }
+
+    function displayDataOnWebsite(data) {
+
+        for (var [key, value] of Object.entries(data)) {
+
+            for (var [key1, value1] of Object.entries(value.onboardingSurveyResponse.questions)) {
+                if(value1.body=="<p>Where are you at in the home buying process?</p>"){
+
+                    if(value1.type=="dropDown"){
+                        //console.log(value1.choices);
+                        for (var [key2, value2] of Object.entries(value1.choices)) {
+                            if(value2.value=="I have a closing date scheduled"){
+
+                                if(value2.selected==true){
+                                $('#amount_1').parents('table').hide();
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    fetchDataFromDatabase();
+    clearInterval(firebaseinteg);
+        }
+    },100);
+</script>
+
+<script>
+//Prod code by Amit Saini for Home Services CTA & Placemat
+	countTIcalling=0;
+	function initiateTravelersAPI(){
+		var existCondition_vue2 = setInterval(function() {
+		  countTIcalling=countTIcalling+1;
+			var travelersWidget = document.getElementsByClassName('travelers_widget');//CTA
+			if(travelersWidget.length){
+				for(var i=0;i<travelersWidget.length;i++){
+					let product = travelersWidget[i].getAttribute("data-product");
+				let widget = `<framework-checkbox id="frameworkcheckbox" license="047bc57e-db36-44d4-b83c-38e05e99c193" product="${product}" adunit="ruf8TRoc" userid="${CONF.preload.currentUser.currentUser.id}" firstName="Nick" lastName="Riviera" email="drnick@testco.com" address1="5276 Heritage Ln" address2="" city="Hillard" state="OH" Zip="43026" apiurl="https://api.dd.insuramatch.com" vce-ready=""></framework-checkbox>`;
+				// var widget = '<framework-checkbox license="047bc57e-db36-44d4-b83c-38e05e99c193" adunit="ruf8TRoc" apiurl="https://api.dd.insuramatch.com" product="cable_internet" userid="f4117653-6f5e-11ee-8b0a-125be3c03799"></framework-checkbox>';
+					travelersWidget[i].innerHTML=widget;
+				}
+			}
+
+			var travelersWidget2 = document.getElementsByClassName('placemat_widget');
+			if(travelersWidget2!==null){
+				for(var i=0;i<travelersWidget2.length;i++){
+				var widget = '<framework-todolist license="047bc57e-db36-44d4-b83c-38e05e99c193" adunit="ruf8TRoc" userid="'+CONF.preload.currentUser.currentUser.id+'" apiurl="https://api.dd.insuramatch.com" vce-ready=""></framework-todolist>';
+					travelersWidget2[i].innerHTML=widget;
+				}
+			}
+
+			if(travelersWidget.length || travelersWidget2.length){
+				clearInterval(existCondition_vue2);
+				clearInterval(intervalIdt);
+				console.log('widgetLog','finished widget loading.');
+				//loadScript("https://cdn.dd.insuramatch.com/framework/placemat/framework-todolist.js");
+			  //loadScript("https://cdn.dd.insuramatch.com/framework/checkbox/framework-checkbox.js");
+			}else{
+			   console.log('widgetLog','checking...'+countTIcalling);
+			  if(countTIcalling>=5){
+    		  console.log('widgetLog','checking stopped');
+    			clearInterval(existCondition_vue2);
+    			//clearInterval(existCondition_vue2);
+    		}
+			}
+
+		},1000);
+
+		// var existCondition_vue = setInterval(function() {
+		// 		var container = document.querySelectorAll('framework-todolist');
+		// 		if(container.length){
+		// 		clearInterval(existCondition_vue);
+		// 		// var container2 = document.querySelector('framework-todolist').shadowRoot.querySelectorAll('.frameworktodolist-inner .listWrapper');
+		// 		// 	container2.forEach(function (item) {
+		// 		// 		item.style.width = '100%';
+		// 		// 		// Add more styles as needed
+		// 		// 	});
+
+		// 		}
+		// },1000);
+
+		// if(countTIcalling>=5){
+		//   console.log('widgetLog','checking stopped');
+		// 	clearInterval(intervalIdt);
+		// }else{
+		//   console.log('widgetLog','checking for widgets '+countTIcalling);
+		// }
+	}
+
+	var checkJQt = setInterval(function(){
+	if (typeof $ !== 'undefined') {
+		intervalIdt = setTimeout(initiateTravelersAPI, 1000);
+		clearInterval(checkJQt);
+
+		$(document).on('click', '.directional__nav__button--left', function(event) {
+      intervalIdt = setTimeout(initiateTravelersAPI, 1000);
+    });
+    $(document).on('click', '.directional__nav__button--right', function(event) {
+      intervalIdt = setTimeout(initiateTravelersAPI, 1000);
+    });
+    $(document).on('click', '.next-section', function(event) {
+      intervalIdt = setTimeout(initiateTravelersAPI, 1000);
+    });
+    $(document).on('click', '.directional__nav__label', function(event) {
+      intervalIdt = setTimeout(initiateTravelersAPI, 1000);
+    });
+
+  function waitForShadowRoot() {
+    const interval = setInterval(() => {
+      const buttons = document.querySelector('framework-checkbox')?.shadowRoot?.querySelectorAll('.box2abutton');
+      if (buttons) {
+        clearInterval(interval);  // Stop polling once the buttons are found
+        buttons.forEach(button => {
+          button.addEventListener('click', function() {
+            buttonClicked = $(this).closest('.box2a').find('.lg, .sm').first().text().trim();
+            console.log('Button clicked:', buttonClicked);
+            sendData();
+          });
+        });
+        console.log('Buttons found and event listeners attached.');
+      }
+    }, 10000); // Check every 5000ms if the shadowRoot is available
+  }
+
+    function waitForShadowRootTodList() {
+    const interval = setInterval(() => {
+      const buttons = document.querySelector('framework-todolist')?.shadowRoot?.querySelectorAll('.ctabutton');
+      if (buttons) {
+        clearInterval(interval);  // Stop polling once the buttons are found
+        buttons.forEach(button => {
+          button.addEventListener('click', function() {
+                        buttonClicked = $(this).closest('.listItem').find('.itemDisplayName').first().text().trim();
+            console.log('Button clicked:', buttonClicked);
+            sendData();
+          });
+        });
+        console.log('ToDo Buttons found and event listeners attached.');
+      }
+    }, 10000); // Check every 5000ms if the shadowRoot is available
+  }
+
+  // Start the polling mechanism
+  waitForShadowRoot();
+  waitForShadowRootTodList();
+
+	}
+},100);
+
+
+
+function loadScript(url) {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src = url;
+    document.head.appendChild(script);
+}
+buttonClicked='';
+//End of prod code by Amit Saini for Home Services CTA & Placemat
+</script>
+
+<script>
+
+			async function sendData() {
+				fetch("https://script.google.com/macros/s/AKfycbzP_dKwUnPwdeGWN438_Q9p_k6yhOd8W03Z8lz6dV-g_JLBu-tjma1yk8L2mAiWNY7Fxw/exec?" +
+				"firstname=" + CONF.preload.currentUser.currentUser.firstName +
+				"&lastname=" + CONF.preload.currentUser.currentUser.lastName +
+				"&email=" + CONF.preload.currentUser.currentUser.email +
+				"&panorama=" + CONF.preload.currentUser.currentUser.client._data.name +
+				"&language=" + CONF.preload.currentUser.currentUser.lang +
+				"&id=" + CONF.preload.currentUser.currentUser.id +
+				"&address1=" + CONF.preload.currentUser.currentUser.address1 +
+				"&address2=" + CONF.preload.currentUser.currentUser.address2 +
+				"&state=" + CONF.preload.currentUser.currentUser.state +
+				"&city=" + CONF.preload.currentUser.currentUser.city +
+				"&zip=" + CONF.preload.currentUser.currentUser.zipCode +
+				"&date=" + new Date().toISOString().split('T')[0]+
+				"&clickedOn=" + buttonClicked,
+				{mode: "no-cors"})
+				  .then(response => response.json())
+				  .then(data => console.log('Success:', data))
+				  .catch(error => console.error('Error:', error));
+			}
+    </script>
+<script>
+var user_data = {
+   "firstName": CONF.preload.currentUser.currentUser.firstName,
+   "lastName": CONF.preload.currentUser.currentUser.lastName,
+   "email": CONF.preload.currentUser.currentUser.email,
+   "address1": CONF.preload.currentUser.currentUser.address1,
+   "address2": CONF.preload.currentUser.currentUser.address2,
+   "city": CONF.preload.currentUser.currentUser.city,
+   "state": CONF.preload.currentUser.currentUser.state,
+   "zip": CONF.preload.currentUser.currentUser.zipCode
+}
+console.log(user_data);
+// Example usage:
+//addParameterIfURLMatches('pano-name', CONF.preload.company.name,'https://frameworkhomeownerssandbox.thoughtindustries.com/learn/dashboard');
+//addParameterIfURLMatches('pano-name', CONF.preload.company.name,'https://frameworkhomeownerssandbox.thoughtindustries.com/learn/survey');
+
+</script>
+<script>
+$(document).ready(function() {
+  var surveyInterval = setInterval(function() {
+    // Check if the Save & Continue button exists
+    if ($('.survey .application__content--survey .btn--primary').length > 0) {
+      clearInterval(surveyInterval);
+
+      // Listen for click on Save & Continue button
+      $('.survey .application__content--survey .btn--primary').on('click', function(e) {
+        var clientInfo = CONF.preload.currentUser.currentUser.client;
+        // Check if either state is MT
+        var isMontana = getCurrentHomeState();
+        console.log('Montana detected:', isMontana);  // Log the result
+
+        // If either state is MT, show the modal
+        if (!clientInfo && isMontana) {
+          showModal();
+        }
+      });
+    }
+  }, 1000); // Check every 1 second until the button is found
+
+  // Function to check if either state field is "MT"
+  function getCurrentHomeState() {
+    var state1 = '';
+    var state2 = '';
+
+    $('.survey .application__content--survey .items__list').each(function() {
+      var label = $(this).find('p').text().trim();
+
+      if (label === "Current home state") {
+        state1 = $(this).find('select.State').val();
+      }
+
+      if (label === "Property State") {
+        state2 = $(this).find('select.PropertyState').val();
+      }
+    });
+
+    return state1 === "MT" || state2 === "MT";
+  }
+
+  // Function to show the modal
+  function showModal() {
+    var modal = $('<div>')
+      .css({
+        'position': 'fixed',
+        'top': '0',
+        'left': '0',
+        'width': '100%',
+        'height': '100%',
+        'background-color': 'rgba(0, 0, 0, 0.5)',
+        'display': 'flex',
+        'justify-content': 'center',
+        'align-items': 'center'
+      })
+      .append(
+    '<div style="background: white; padding: 30px; border-radius: 10px; text-align: center; max-width: 400px;">' +
+    '<img src="https://i.imgur.com/YKtve7u.png" alt="NeighborWorks Montana" style="max-width: 180px; margin-bottom: 20px;" />' +
+    '<p style="margin-bottom: 20px;">We noticed you entered your state as Montana.  Do you need to work with a counseling agency in Montana for loan product or down payment assistance?  If so, let us connect you with NeighborWorks Montana</p>' +
+    '<button id="yes" style="background-color: #007bff; color: white; border: none; padding: 10px 20px; margin-right: 10px; border-radius: 5px;">Yes</button>' +
+    '<button id="no" style="background-color: #6c757d; color: white; border: none; padding: 10px 20px; border-radius: 5px;">No</button>' +
+  '</div>');
+    $('body').append(modal);
+
+    // Event listeners for Yes and No buttons
+    $('#yes').on('click', function() {
+      modal.remove(); // Remove the modal
+
+      var userId = CONF.preload.currentUser.currentUser.id;
+      var email = user_data.email;
+      var nwmtPanoramaId = "b0368822-c6bf-4117-96c6-7887501deb5d";
+
+      // Call the backend to assign the panorama
+      $.ajax({
+        type: 'PUT',
+        url: 'https://nwmt-production.up.railway.app/assign-panorama',
+        contentType: 'application/json',
+        data: JSON.stringify({
+          userId: userId,
+          email: email,
+          nwmtPanoramaId: nwmtPanoramaId
+        }),
+        success: function(response) {
+          console.log('Successfully assigned to panorama');
+          window.location.href = '/learn/dashboard';
+        },
+        error: function(err) {
+          console.log('Error assigning panorama:', err);
+        }
+      });
+    });
+
+    $('#no').on('click', function() {
+      modal.remove();
+      window.location.href = '/learn/dashboard';
+    });
+  }
+});
+</script>
+<script>
+  const dashboardObserver = new MutationObserver(function(mutationsList, observer) {
+    for (let mutation of mutationsList) {
+      if (mutation.type === 'childList' && mutation.addedNodes.length) {
+        const panel = mutation.addedNodes.item(0)
+        if (panel.nodeType === 1 && panel.role === 'tabpanel') {
+          const courseToggles = panel.querySelectorAll('.dashboard-access-list-item-expander');
+          if (courseToggles?.length) {
+            courseToggles.forEach((courseToggle) => {
+              courseToggle.click();
+            });
+          }
+        }
+      }
+    }
+  });
+
+  dashboardObserver.observe(document.querySelector('#learner'), { childList: true, subtree: true });
+
+  const navObserver = new MutationObserver(function(mutationsList, observer) {
+    for (let mutation of mutationsList) {
+      if (mutation.type === 'childList' && mutation.addedNodes.length) {
+        const nav = mutation.target
+        if (nav.nodeType === 1 && nav.tagName === 'NAV' && nav.classList.contains('top-bar')) {
+          const toggle = nav.querySelector('.toggle-topbar button')
+          if (toggle) {
+            toggle.addEventListener('click', (e) => {
+              e.stopPropagation();
+              nav.classList.toggle('expanded')
+            }, true);
+          }
+
+          const links = nav.querySelectorAll('.top-bar-section li > a')
+          links.forEach((link) => {
+            link.addEventListener('click', () => {
+              setTimeout(() => {
+                nav.classList.remove('expanded')
+              }, 400);
+            });
+          });
+
+          navObserver.disconnect();
+          break;
+        }
+      }
+    }
+  });
+
+  navObserver.observe(document.querySelector('#learner'), { childList: true, subtree: true });
+
+  document.addEventListener('DOMContentLoaded', () => {
+    if (document.cookie.match(/^(.*;)?\s*authTokenExpires\s*=\s*[^;]+(.*)?$/)) {
+      document.body.classList.add('ck-dashboard-nav')
+      document.body.dataset.dashboard = 'active'
+    }
+  });
+</script>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA7VJu_nqgJEhoVver7AgBWkoMjpg_uhcU&callback=initMap&libraries=places&v=weekly" defer ></script>
