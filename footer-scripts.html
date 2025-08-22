@@ -144,140 +144,6 @@ var checkJQs = setInterval(function(){
         }
     },100);
 </script>
-
-<script>
-//Prod code by Amit Saini for Home Services CTA & Placemat
-	countTIcalling=0;
-	function initiateTravelersAPI(){
-		var existCondition_vue2 = setInterval(function() {
-		  countTIcalling=countTIcalling+1;
-			var travelersWidget = document.getElementsByClassName('travelers_widget');//CTA
-			if(travelersWidget.length){
-				for(var i=0;i<travelersWidget.length;i++){
-					let product = travelersWidget[i].getAttribute("data-product");
-				let widget = `<framework-checkbox id="frameworkcheckbox" license="047bc57e-db36-44d4-b83c-38e05e99c193" product="${product}" adunit="ruf8TRoc" userid="${CONF.preload.currentUser.currentUser.id}" firstName="Nick" lastName="Riviera" email="drnick@testco.com" address1="5276 Heritage Ln" address2="" city="Hillard" state="OH" Zip="43026" apiurl="https://api.dd.insuramatch.com" vce-ready=""></framework-checkbox>`;
-				// var widget = '<framework-checkbox license="047bc57e-db36-44d4-b83c-38e05e99c193" adunit="ruf8TRoc" apiurl="https://api.dd.insuramatch.com" product="cable_internet" userid="f4117653-6f5e-11ee-8b0a-125be3c03799"></framework-checkbox>';
-					travelersWidget[i].innerHTML=widget;
-				}
-			}
-
-			var travelersWidget2 = document.getElementsByClassName('placemat_widget');
-			if(travelersWidget2!==null){
-				for(var i=0;i<travelersWidget2.length;i++){
-				var widget = '<framework-todolist license="047bc57e-db36-44d4-b83c-38e05e99c193" adunit="ruf8TRoc" userid="'+CONF.preload.currentUser.currentUser.id+'" apiurl="https://api.dd.insuramatch.com" vce-ready=""></framework-todolist>';
-					travelersWidget2[i].innerHTML=widget;
-				}
-			}
-
-			if(travelersWidget.length || travelersWidget2.length){
-				clearInterval(existCondition_vue2);
-				clearInterval(intervalIdt);
-				console.log('widgetLog','finished widget loading.');
-				//loadScript("https://cdn.dd.insuramatch.com/framework/placemat/framework-todolist.js");
-			  //loadScript("https://cdn.dd.insuramatch.com/framework/checkbox/framework-checkbox.js");
-			}else{
-			   console.log('widgetLog','checking...'+countTIcalling);
-			  if(countTIcalling>=5){
-    		  console.log('widgetLog','checking stopped');
-    			clearInterval(existCondition_vue2);
-    			//clearInterval(existCondition_vue2);
-    		}
-			}
-
-		},1000);
-
-		// var existCondition_vue = setInterval(function() {
-		// 		var container = document.querySelectorAll('framework-todolist');
-		// 		if(container.length){
-		// 		clearInterval(existCondition_vue);
-		// 		// var container2 = document.querySelector('framework-todolist').shadowRoot.querySelectorAll('.frameworktodolist-inner .listWrapper');
-		// 		// 	container2.forEach(function (item) {
-		// 		// 		item.style.width = '100%';
-		// 		// 		// Add more styles as needed
-		// 		// 	});
-
-		// 		}
-		// },1000);
-
-		// if(countTIcalling>=5){
-		//   console.log('widgetLog','checking stopped');
-		// 	clearInterval(intervalIdt);
-		// }else{
-		//   console.log('widgetLog','checking for widgets '+countTIcalling);
-		// }
-	}
-
-	var checkJQt = setInterval(function(){
-	if (typeof $ !== 'undefined') {
-		intervalIdt = setTimeout(initiateTravelersAPI, 1000);
-		clearInterval(checkJQt);
-
-		$(document).on('click', '.directional__nav__button--left', function(event) {
-      intervalIdt = setTimeout(initiateTravelersAPI, 1000);
-    });
-    $(document).on('click', '.directional__nav__button--right', function(event) {
-      intervalIdt = setTimeout(initiateTravelersAPI, 1000);
-    });
-    $(document).on('click', '.next-section', function(event) {
-      intervalIdt = setTimeout(initiateTravelersAPI, 1000);
-    });
-    $(document).on('click', '.directional__nav__label', function(event) {
-      intervalIdt = setTimeout(initiateTravelersAPI, 1000);
-    });
-
-  function waitForShadowRoot() {
-    const interval = setInterval(() => {
-      const buttons = document.querySelector('framework-checkbox')?.shadowRoot?.querySelectorAll('.box2abutton');
-      if (buttons) {
-        clearInterval(interval);  // Stop polling once the buttons are found
-        buttons.forEach(button => {
-          button.addEventListener('click', function() {
-            buttonClicked = $(this).closest('.box2a').find('.lg, .sm').first().text().trim();
-            console.log('Button clicked:', buttonClicked);
-            sendData();
-          });
-        });
-        console.log('Buttons found and event listeners attached.');
-      }
-    }, 10000); // Check every 5000ms if the shadowRoot is available
-  }
-
-    function waitForShadowRootTodList() {
-    const interval = setInterval(() => {
-      const buttons = document.querySelector('framework-todolist')?.shadowRoot?.querySelectorAll('.ctabutton');
-      if (buttons) {
-        clearInterval(interval);  // Stop polling once the buttons are found
-        buttons.forEach(button => {
-          button.addEventListener('click', function() {
-                        buttonClicked = $(this).closest('.listItem').find('.itemDisplayName').first().text().trim();
-            console.log('Button clicked:', buttonClicked);
-            sendData();
-          });
-        });
-        console.log('ToDo Buttons found and event listeners attached.');
-      }
-    }, 10000); // Check every 5000ms if the shadowRoot is available
-  }
-
-  // Start the polling mechanism
-  waitForShadowRoot();
-  waitForShadowRootTodList();
-
-	}
-},100);
-
-
-
-function loadScript(url) {
-    var script = document.createElement("script");
-    script.type = "text/javascript";
-    script.src = url;
-    document.head.appendChild(script);
-}
-buttonClicked='';
-//End of prod code by Amit Saini for Home Services CTA & Placemat
-</script>
-
 <script>
 
 			async function sendData() {
@@ -437,6 +303,29 @@ $(document).ready(function() {
 
   dashboardObserver.observe(document.querySelector('#learner'), { childList: true, subtree: true });
 
+  const profileNavObserver = new MutationObserver(function(mutationsList, observer) {
+    for (let mutation of mutationsList) {
+      if (mutation.type === 'childList' && mutation.addedNodes.length) {
+        const sidebar = mutation.addedNodes.item(0)
+        if (sidebar.nodeType === 1 && sidebar.classList.contains('sidebar--closed--right')) {
+          const toggle = sidebar.querySelector('.dashboard-header-dropdown__link')
+          const dropdown = sidebar.querySelector('.dashboard-header-dropdown')
+          if (toggle && dropdown) {
+            const links = dropdown.querySelectorAll('.dashboard-header-dropdown a')
+            links.forEach((link) => {
+              link.addEventListener('click', (e) => {
+                link.blur();
+                toggle.click();
+              }, true);
+            });
+          }
+        }
+      }
+    }
+  });
+
+  profileNavObserver.observe(document.querySelector('#learner'), { childList: true, subtree: true });
+
   const navObserver = new MutationObserver(function(mutationsList, observer) {
     for (let mutation of mutationsList) {
       if (mutation.type === 'childList' && mutation.addedNodes.length) {
@@ -459,7 +348,7 @@ $(document).ready(function() {
             });
           });
 
-          navObserver.disconnect();
+          observer.disconnect();
           break;
         }
       }
@@ -467,6 +356,68 @@ $(document).ready(function() {
   });
 
   navObserver.observe(document.querySelector('#learner'), { childList: true, subtree: true });
+
+  const sliderObserver = new MutationObserver(function(mutationsList, observer) {
+    for (let mutation of mutationsList) {
+      if (mutation.type === 'childList' && mutation.addedNodes.length && mutation.target.nodeType === 1) {
+        const carousel = mutation.target.querySelector('.featured-content-carousel__list')
+        if (carousel) {
+          const slides = carousel.querySelectorAll('li');
+          const total = slides.length;
+          if (total > 1) {
+            const dots = mutation.target.querySelectorAll('.featured-content-carousel__dot')
+            const arrows = mutation.target.querySelectorAll('.featured-content-carousel__nav .btn')
+            let x = slideIdx = 0
+            let slideInterval
+
+            function translateSlide() {
+              x = slideIdx * -100
+              carousel.style.transform = `translateX(${x}%)`;
+              dots.forEach((dot, dotIdx) => {
+                const toggler = dotIdx === slideIdx? 'add' : 'remove'
+                dot.classList[toggler]('featured-content-carousel__dot--active');
+              });
+
+              arrows.forEach((arrow, arrowIdx) => {
+                const arrowClass = !((slideIdx + arrowIdx) % total) ? 'btn disabled' : 'btn btn--primary'
+                arrow.setAttribute('class', arrowClass)
+              });
+            }
+
+            function startInterval() {
+              slideInterval = setInterval(() => {
+                slideIdx = (slideIdx + 1) % total
+                translateSlide()
+              }, 8000);
+            }
+
+            arrows.forEach((arrow, arrowIdx) => {
+              arrow.addEventListener('click', (e) => {
+                e.stopPropagation();
+                slideIdx = arrowIdx ? slideIdx + 1 : slideIdx - 1
+                translateSlide()
+              });
+            });
+
+            carousel.addEventListener('mouseenter', () => {
+              clearInterval(slideInterval);
+            });
+
+            carousel.addEventListener('mouseleave', () => {
+              startInterval();
+            });
+
+            startInterval();
+          }
+
+          observer.disconnect();
+          break;
+        }
+      }
+    }
+  });
+
+  sliderObserver.observe(document.querySelector('#learner'), { childList: true, subtree: true });
 
   document.addEventListener('DOMContentLoaded', () => {
     if (document.cookie.match(/^(.*;)?\s*authTokenExpires\s*=\s*[^;]+(.*)?$/)) {
