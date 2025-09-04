@@ -388,7 +388,7 @@ $(document).ready(function() {
               slideInterval = setInterval(() => {
                 slideIdx = (slideIdx + 1) % total
                 translateSlide()
-              }, 8000);
+              }, 6000);
             }
 
             arrows.forEach((arrow, arrowIdx) => {
@@ -419,6 +419,11 @@ $(document).ready(function() {
 
   sliderObserver.observe(document.querySelector('#learner'), { childList: true, subtree: true });
 
+  new ResizeObserver(() => {
+    let scrollbar = window.innerWidth - document.documentElement.clientWidth;
+    document.documentElement.style.setProperty('--scrollbar-width', `${scrollbar}px`);
+  }).observe(document.documentElement);
+
   document.addEventListener('DOMContentLoaded', () => {
     if (document.cookie.match(/^(.*;)?\s*authTokenExpires\s*=\s*[^;]+(.*)?$/)) {
       document.body.classList.add('ck-dashboard-nav')
@@ -426,5 +431,49 @@ $(document).ready(function() {
     }
   });
 </script>
+<script nonce="{{cspNonce}}" type="text/javascript">
+(function () {
+  const panoramaId = "b0368822-c6bf-4117-96c6-7887501deb5d";
+  const styleTagId = "ti-hide-lang-for-test-panorama";
 
+  function addHideCSS() {
+    if (document.getElementById(styleTagId)) return; // only once
+    const style = document.createElement("style");
+    style.id = styleTagId;
+    style.textContent = `
+      /* Hide Transifex Live language control variations */
+      #tx-live-lang-current,
+      .txlive-langselector,
+      .txlive-langselector-current,
+      #tx-live-lang-switcher,
+      #tx-live-lang {
+        display: none !important;
+      }
+    `;
+    document.head.appendChild(style);
+  }
+
+  function tryApply() {
+    try {
+      const panoId = window.CONF?.preload?.currentUser?.currentUser?.client?.id;
+      if (panoId === panoramaId) {
+        addHideCSS();
+        return true;
+      }
+    } catch (_) {}
+    return false;
+  }
+
+  // Try immediately (in case user is already signed in)
+  if (tryApply()) return;
+
+  // Bounded wait (max 5s) for CONF to populate after sign-in
+  const start = Date.now();
+  const t = setInterval(() => {
+    if (tryApply() || Date.now() - start > 5000) {
+      clearInterval(t);
+    }
+  }, 100);
+})();
+</script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA7VJu_nqgJEhoVver7AgBWkoMjpg_uhcU&callback=initMap&libraries=places&v=weekly" defer ></script>
