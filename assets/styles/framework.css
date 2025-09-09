@@ -1220,7 +1220,8 @@ footer.footer {
 }
 
 .footer .social img {
-    width: 25px;
+    width: auto;
+    height: 25px;
 }
 
 .footer .copyright p {
