@@ -55,10 +55,26 @@
 
           const links = nav.querySelectorAll('.top-bar-section li > a')
           links.forEach((link) => {
-            link.addEventListener('click', () => {
+            link.addEventListener('click', (e) => {
               setTimeout(() => {
                 nav.classList.remove('expanded')
               }, 400);
+
+              if (link.hash && window.location.pathname === link.pathname) {
+                e.preventDefault();
+
+                const anchor = document.querySelector(link.hash)
+                if (anchor) {
+                  const rect = anchor.getBoundingClientRect();
+                  const y = rect.top + window.scrollY
+
+                  window.scrollTo({
+                      left: 0,
+                      top: y,
+                      behavior: 'smooth'
+                  });
+                }
+              }
             });
           });
 
